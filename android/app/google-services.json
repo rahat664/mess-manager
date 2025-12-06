@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "369780198504",
+    "project_id": "neuramess",
+    "storage_bucket": "neuramess.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369780198504:android:344903256cf45791467fdd",
+        "android_client_info": {
+          "package_name": "com.example.mess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "369780198504-vvmccl8ir4j1hspd2f6ts2jd6hiu6vg2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mess",
+            "certificate_hash": "1b56db2a27bd00fe7878841345b73c0142b0d8a1"
+          }
+        },
+        {
+          "client_id": "369780198504-cphfpu5p5dg6ed0imrlg74jcspln9p32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUx0DRz24fsx9hr5HXmkVBYhXN0LVWClI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "369780198504-cphfpu5p5dg6ed0imrlg74jcspln9p32.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "369780198504-f35clnvb64calpq18d3emioqnr2b3kfr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.mess"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
