@@ -126,6 +126,13 @@ class NotificationSettingsScreen extends ConsumerWidget {
                 'Notification Types',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
+              const SizedBox(height: 4),
+              Text(
+                'Currently, all notification types are enabled when notifications are turned on. Per-type preferences coming soon.',
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Colors.grey,
+                    ),
+              ),
               const SizedBox(height: 8),
               Card(
                 child: Column(

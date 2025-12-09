@@ -11,10 +11,14 @@ import '../../../core/utils/analytics_logger.dart';
 
 /// Top-level function for handling background messages.
 /// This MUST be a top-level or static function.
+/// Background messages are handled automatically by FCM.
+/// Custom logic can be added here if needed (e.g., updating local state).
 @pragma('vm:entry-point')
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // Handle background message
   // Don't call Firebase.initializeApp() here; it's already initialized.
+  // The message is automatically displayed as a notification by the system.
+  // Add custom logic here if you need to process the message data.
 }
 
 class NotificationService {
@@ -258,6 +262,9 @@ class NotificationService {
 
   void _onNotificationTapped(NotificationResponse response) {
     // Handle notification tap from local notifications
+    // The payload contains the notification data as a string
+    // Navigation is handled by NotificationListener widget which listens to the stream
+    // This is intentionally minimal as the main handling is done via the notification stream
   }
 }
 

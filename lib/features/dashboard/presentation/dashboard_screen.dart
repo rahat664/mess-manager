@@ -33,11 +33,16 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
   @override
   void initState() {
     super.initState();
-    // Show notification permission dialog after a short delay
-    Future.delayed(const Duration(seconds: 2), () {
-      if (mounted && !_hasShownPermissionDialog) {
+    // Show notification permission dialog after the widget is fully built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_hasShownPermissionDialog) {
         _hasShownPermissionDialog = true;
-        showNotificationPermissionDialogIfNeeded(context, ref);
+        // Add a small delay to ensure navigation is complete
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted) {
+            showNotificationPermissionDialogIfNeeded(context, ref);
+          }
+        });
       }
     });
   }

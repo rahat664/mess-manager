@@ -55,4 +55,6 @@ final notificationStreamProvider = StreamProvider<RemoteMessage>((ref) {
 });
 
 /// Provider for notification enabled state in user preferences.
+/// Note: This is a simple in-memory state. For production, consider persisting
+/// this to SharedPreferences or Firestore to maintain settings across app restarts.
 final notificationsEnabledProvider = StateProvider<bool>((ref) => true);
