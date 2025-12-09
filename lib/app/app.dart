@@ -18,8 +18,10 @@ class _MessAppState extends ConsumerState<MessApp> {
   @override
   void initState() {
     super.initState();
-    // Initialize notification service asynchronously
-    _initializeNotifications();
+    // Initialize notification service after the first build completes
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initializeNotifications();
+    });
   }
 
   Future<void> _initializeNotifications() async {
