@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/notification_service.dart';
+import '../data/notification_helper.dart';
 
 /// Provider for FirebaseMessaging instance.
 final firebaseMessagingProvider = Provider<FirebaseMessaging>((ref) {
@@ -21,6 +22,15 @@ final notificationServiceProvider = Provider<NotificationService>((ref) {
   return NotificationService(
     messaging: ref.watch(firebaseMessagingProvider),
     localNotifications: ref.watch(localNotificationsProvider),
+    firestore: FirebaseFirestore.instance,
+    auth: FirebaseAuth.instance,
+  );
+});
+
+/// Provider for NotificationHelper.
+final notificationHelperProvider = Provider<NotificationHelper>((ref) {
+  return NotificationHelper(
+    notificationService: ref.watch(notificationServiceProvider),
     firestore: FirebaseFirestore.instance,
     auth: FirebaseAuth.instance,
   );

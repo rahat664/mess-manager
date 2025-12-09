@@ -6,6 +6,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../../../core/constants/app_constants.dart';
+
 /// Top-level function for handling background messages.
 /// This MUST be a top-level or static function.
 @pragma('vm:entry-point')
@@ -62,9 +64,9 @@ class NotificationService {
     // Create Android notification channel
     if (Platform.isAndroid) {
       const channel = AndroidNotificationChannel(
-        'mess_notifications',
-        'Mess Notifications',
-        description: 'Notifications for mess activities',
+        notificationChannelId,
+        notificationChannelName,
+        description: notificationChannelDescription,
         importance: Importance.high,
         playSound: true,
         enableVibration: true,
@@ -174,9 +176,9 @@ class NotificationService {
     String? payload,
   }) async {
     const androidDetails = AndroidNotificationDetails(
-      'mess_notifications',
-      'Mess Notifications',
-      channelDescription: 'Notifications for mess activities',
+      notificationChannelId,
+      notificationChannelName,
+      channelDescription: notificationChannelDescription,
       importance: Importance.high,
       priority: Priority.high,
       playSound: true,

@@ -18,6 +18,7 @@ import '../../meals/data/meal_repository.dart';
 import '../../meals/models/meal.dart';
 import '../../mess/providers/mess_providers.dart';
 import '../../notifications/presentation/notification_permission_dialog.dart';
+import '../../notifications/presentation/notification_icon_button.dart';
 
 class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
@@ -80,6 +81,7 @@ class _DashboardScreenState extends ConsumerState<DashboardScreen> {
             elevation: 0,
             title: Text('${mess.name} • ${_formatMonthLabel(selectedMonth)}'),
             actions: [
+              const NotificationIconButton(),
               IconButton(
                 icon: const Icon(Icons.swap_horiz),
                 onPressed: () => context.goNamed(AppRoute.messSelection.name),
