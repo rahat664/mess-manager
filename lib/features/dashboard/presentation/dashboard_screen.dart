@@ -17,9 +17,35 @@ import '../../expenses/models/expense.dart';
 import '../../meals/data/meal_repository.dart';
 import '../../meals/models/meal.dart';
 import '../../mess/providers/mess_providers.dart';
+import '../../notifications/presentation/notification_permission_dialog.dart';
+import '../../notifications/presentation/notification_icon_button.dart';
 
-class DashboardScreen extends ConsumerWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+  bool _hasShownPermissionDialog = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Show notification permission dialog after the widget is fully built
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!_hasShownPermissionDialog) {
+        _hasShownPermissionDialog = true;
+        // Add a small delay to ensure navigation is complete
+        Future.delayed(const Duration(milliseconds: 500), () {
+          if (mounted) {
+            showNotificationPermissionDialogIfNeeded(context, ref);
+          }
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,6 +86,7 @@ class DashboardScreen extends ConsumerWidget {
             elevation: 0,
             title: Text('${mess.name} • ${_formatMonthLabel(selectedMonth)}'),
             actions: [
+              const NotificationIconButton(),
               IconButton(
                 icon: const Icon(Icons.swap_horiz),
                 onPressed: () => context.goNamed(AppRoute.messSelection.name),

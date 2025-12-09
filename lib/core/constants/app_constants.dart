@@ -6,3 +6,8 @@ extension UserRoleLabel on UserRole {
 
 const mealCategories = ['breakfast', 'lunch', 'dinner'];
 const expenseCategories = ['bazar', 'gas', 'electricity', 'internet', 'misc'];
+
+// Notification constants
+const notificationChannelId = 'mess_notifications';
+const notificationChannelName = 'Mess Notifications';
+const notificationChannelDescription = 'Notifications for mess activities';

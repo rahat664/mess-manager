@@ -19,6 +19,9 @@ Future<void> main() async {
       FlutterError.onError = (details) {
         FlutterError.presentError(details);
       };
+      
+      // Note: Notification service is initialized in MessApp's initState
+      // to ensure it has access to the full provider scope and context.
       runApp(const ProviderScope(child: MessApp()));
     },
     (error, stack) => debugPrint('Uncaught error: $error'),

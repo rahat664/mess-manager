@@ -20,6 +20,7 @@ import '../features/meals/presentation/add_edit_meal_screen.dart';
 import '../features/meals/presentation/meals_list_screen.dart';
 import '../features/reports/presentation/monthly_report_screen.dart';
 import '../features/settings/presentation/settings_screen.dart';
+import '../features/notifications/presentation/notification_settings_screen.dart';
 import '../features/auth/data/auth_repository.dart';
 import '../features/mess/providers/mess_providers.dart';
 
@@ -81,6 +82,7 @@ enum AppRoute {
   members,
   report,
   settings,
+  notificationSettings,
 }
 
 final routerNotifierProvider = Provider<RouterNotifier>((ref) => RouterNotifier(ref));
@@ -181,6 +183,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: '/settings',
         name: AppRoute.settings.name,
         builder: (_, __) => const SettingsScreen(),
+      ),
+      GoRoute(
+        path: '/notifications/settings',
+        name: AppRoute.notificationSettings.name,
+        builder: (_, __) => const NotificationSettingsScreen(),
       ),
     ],
   );
