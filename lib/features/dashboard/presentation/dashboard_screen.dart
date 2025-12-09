@@ -17,9 +17,29 @@ import '../../expenses/models/expense.dart';
 import '../../meals/data/meal_repository.dart';
 import '../../meals/models/meal.dart';
 import '../../mess/providers/mess_providers.dart';
+import '../../notifications/presentation/notification_permission_dialog.dart';
 
-class DashboardScreen extends ConsumerWidget {
+class DashboardScreen extends ConsumerStatefulWidget {
   const DashboardScreen({super.key});
+
+  @override
+  ConsumerState<DashboardScreen> createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends ConsumerState<DashboardScreen> {
+  bool _hasShownPermissionDialog = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Show notification permission dialog after a short delay
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted && !_hasShownPermissionDialog) {
+        _hasShownPermissionDialog = true;
+        showNotificationPermissionDialogIfNeeded(context, ref);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

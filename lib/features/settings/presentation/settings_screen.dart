@@ -20,11 +20,21 @@ class SettingsScreen extends ConsumerWidget {
             title: Text(user?.email ?? 'User'),
             subtitle: const Text('Signed in'),
           ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.notifications),
+            title: const Text('Notifications'),
+            subtitle: const Text('Manage notification preferences'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.pushNamed(AppRoute.notificationSettings.name),
+          ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.swap_horiz),
             title: const Text('Switch mess'),
             onTap: () => context.goNamed(AppRoute.messSelection.name),
           ),
+          const Divider(),
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text('Sign out'),
