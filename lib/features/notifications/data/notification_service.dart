@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/utils/analytics_logger.dart';
 
 /// Top-level function for handling background messages.
 /// This MUST be a top-level or static function.
@@ -101,13 +102,19 @@ class NotificationService {
       provisional: false,
     );
 
+    NotificationPermissionStatus status;
     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      return NotificationPermissionStatus.granted;
+      status = NotificationPermissionStatus.granted;
+      AnalyticsLogger.logNotificationPermission('granted');
     } else if (settings.authorizationStatus == AuthorizationStatus.provisional) {
-      return NotificationPermissionStatus.provisional;
+      status = NotificationPermissionStatus.provisional;
+      AnalyticsLogger.logNotificationPermission('provisional');
     } else {
-      return NotificationPermissionStatus.denied;
+      status = NotificationPermissionStatus.denied;
+      AnalyticsLogger.logNotificationPermission('denied');
     }
+
+    return status;
   }
 
   /// Get current notification permission status.
@@ -128,6 +135,7 @@ class NotificationService {
       final token = await _messaging.getToken();
       if (token != null) {
         await _saveTokenToFirestore(token);
+        AnalyticsLogger.logTokenUpdate();
       }
       return token;
     } catch (e) {
@@ -139,6 +147,7 @@ class NotificationService {
   Future<void> subscribeToTopic(String topic) async {
     try {
       await _messaging.subscribeToTopic(topic);
+      AnalyticsLogger.logTopicSubscription(topic);
     } catch (e) {
       // Handle error silently
     }
@@ -148,6 +157,7 @@ class NotificationService {
   Future<void> unsubscribeFromTopic(String topic) async {
     try {
       await _messaging.unsubscribeFromTopic(topic);
+      AnalyticsLogger.logTopicUnsubscription(topic);
     } catch (e) {
       // Handle error silently
     }
@@ -228,6 +238,7 @@ class NotificationService {
 
   void _handleForegroundMessage(RemoteMessage message) {
     _notificationStreamController.add(message);
+    AnalyticsLogger.logNotificationReceived(message.data['type']?.toString() ?? 'unknown');
 
     // Show local notification for foreground messages
     final notification = message.notification;
@@ -242,6 +253,7 @@ class NotificationService {
 
   void _handleNotificationTap(RemoteMessage message) {
     _notificationStreamController.add(message);
+    AnalyticsLogger.logNotificationOpened(message.data['type']?.toString() ?? 'unknown');
   }
 
   void _onNotificationTapped(NotificationResponse response) {

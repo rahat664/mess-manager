@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/theme/app_theme.dart';
 import '../features/notifications/presentation/notification_listener.dart';
+import '../features/notifications/presentation/notification_topic_subscriber.dart';
 import 'router.dart';
 
 class MessApp extends ConsumerWidget {
@@ -11,12 +12,14 @@ class MessApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(routerProvider);
-    return NotificationListener(
-      child: MaterialApp.router(
-        title: 'Mess Manager',
-        theme: AppTheme.light,
-        routerConfig: router,
-        debugShowCheckedModeBanner: false,
+    return NotificationTopicSubscriber(
+      child: NotificationListener(
+        child: MaterialApp.router(
+          title: 'Mess Manager',
+          theme: AppTheme.light,
+          routerConfig: router,
+          debugShowCheckedModeBanner: false,
+        ),
       ),
     );
   }
